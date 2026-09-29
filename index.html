@@ -141,6 +141,10 @@ body.has-cursor .cursor-glow{opacity:1}
 .wrap{position:relative;z-index:2;max-width:1120px;margin:0 auto;padding:40px 22px 80px}
 .view{animation:fadeIn .5s ease both}
 .view[hidden]{display:none}
+/* 详情面板：自身成为纵向滚动容器；body 仍锁定以防背景穿透 */
+#viewPanel{position:fixed;inset:0;z-index:35;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:max(92px,11vh) 22px 64px}
+#viewPanel .panel{width:100%;max-width:1120px;margin:0 auto}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
@@ -1214,6 +1218,7 @@ function openModule(id, origin){
   renderPanel(id);
   viewHome.hidden = true;
   viewPanel.hidden = false;
+  viewPanel.scrollTop = 0;
   syncHash(id);
   window.scrollTo(0,0);
 
